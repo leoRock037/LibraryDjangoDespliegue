@@ -1,0 +1,58 @@
+{% extends "base-admin.html" %}
+
+{% block title %}Agregar Autor{% endblock %}
+
+{% block content %}
+
+	<!-- ...................Contenedor Contenido General......................... -->
+
+	
+	<section class="container content">
+    	<div class="row">
+        	
+        	<section class="panel panel-default">
+  				<section class="panel-body">
+		        	<div class="col-md-12 row">
+		        		<div class="page-header">
+								<h3 class="text-center">AGREGAR AUTOR</h3>
+						</div>
+						<section>
+							<form action="" method="POST" role="form">{% csrf_token %}
+								<div class="form-group">
+									<label for="first_name">Nombre del autor:</label>
+									<input name="first_name" id="first_name" type="text" class="form-control" placeholder="Nombre" required="" autofocus="">
+							    </div>
+
+							    <div class="form-group">
+									<label for="last_name">Apellido del autor:</label>
+									<input name="last_name" id="last_name" type="text" class="form-control" placeholder="Apellido" required="" autofocus="">
+							    </div>
+
+							    <div class="form-group">
+								    <label for="InputEmail1">Correo:</label>
+								    <input  name="email" type="email" class="form-control" id="InputEmail1" placeholder="correo@ejemplo.com">
+								</div>
+
+								<div class="form-group">
+									<label for="biography">Reseña Bibiografica</label>
+									<textarea  name="biography" id="biography" class="form-control" rows="4"></textarea>
+								</div>
+								<div class="form-group">
+								    <label for="photo" name="photo">Cargar Foto Autor:</label>
+								    <input type="file" id="photo">
+								    
+								</div>
+								<button class="btn btn-lg btn-success btn-block" type="submit">Guardar</button>
+		
+							</form>
+			        	{{ information }}		      	
+				      	</section>
+					</div>
+				</section>
+			</section>
+		</div>	
+	</section>
+  		
+
+{% endblock %}
+

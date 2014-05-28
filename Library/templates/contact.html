@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Contacto{% endblock %}
+
+{% block content %}
+
+	<!-- ...................Contenedor Contenido General......................... -->
+
+	
+	<section class="container content">
+    	<div class="row">
+        	
+        	<section class="panel panel-default">
+  				<section class="panel-body">
+		        	<div class="col-md-12 row">
+		        		<div class="page-header">
+								<h3 class="text-center">CONTACTO</h3>
+						</div>
+						<section class="text-center">
+			        		<ul>
+			      				<li>Email:{{Contact.email_Contact}}</li>
+			      				<li>Dirección: cll 123 N°56 -7 </li>
+			      				<li>Telefonos: 1234567-3208088409 </li>
+			      				<div class="caja-redes">
+								   <a href="#" class="icon-button linkedin"><i class="icon-linkedin"></i><span></span></a>
+								   <a href="#" class="icon-button pinterest"><i class="icon-pinterest"></i><span></span></a>
+								   <a href="#" class="icon-button twitter"><i class="icon-twitter"></i><span></span></a>
+								   <a href="#" class="icon-button facebook"><i class="icon-facebook"></i><span></span></a>
+								   <a href="#" class="icon-button google-plus"><i class="icon-google-plus"></i><span></span></a>
+								</div>
+			      			</ul>			      	
+				      	</section>
+					</div>
+				</section>
+			</section>
+		</div>	
+	</section>
+  		
+
+{% endblock %}

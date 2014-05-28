@@ -1,0 +1,77 @@
+
+{% extends "base.html" %}
+
+{% block title %}Libros{% endblock %}
+
+{% block content %}
+
+<!-- ...................Contenedor barra de Busqueda ......................... -->
+
+	<section class="container">
+	   	<div class=" col-lg-push-3 col-lg-6">
+		    <div class="input-group">
+		      <input type="search" placeholder="Escribe el nombre de un libro..." class="form-control">
+		      <span class="input-group-btn">
+		        <button class="btn btn-default" type="button">Buscar</button>
+		      </span>
+		    </div>
+	  	</div>
+	</section>					
+
+
+	<!-- ...................Contenedor Contenido General......................... -->
+
+	<section class="container content">
+        <div class="row">
+            <div class="col-md-2">
+                <p class="lead">Libros por Categoria</p>
+                <div class="list-group">
+                	{% if category %}
+			  			{% for b in category%}
+			  				<p><a class="list-group-item" href="#">{{b.name_Category}}</a></p>
+			  			{% endfor%}
+
+			  		{% else %}
+			  			<h5 class="list-group-item">No se registran Libros</h5>
+			  		{%endif%}
+                </div>
+            </div>
+
+            <div class="col-md-9 row text-center">
+            	<div class="page-header">
+  					<h4 class="text-center">LIBROS</h4>
+				</div>	
+				<div class="text-center">
+					<ul class="pagination">
+					  <li><a href="#">&laquo;</a></li>
+					  <li><a href="#">1</a></li>
+					  <li><a href="#">2</a></li>
+					  <li><a href="#">3</a></li>
+					  <li><a href="#">4</a></li>
+					  <li><a href="#">5</a></li>
+					  <li><a href="#">&raquo;</a></li>
+					</ul>
+				</div>	
+				<div class="col-sm-2 col-lg-2 col-md-2">
+					{% if books %}
+						{% for book_id in books%}
+						<div class="thumbnail ">
+							<p><img src='{{MEDIA_URL}}{{book_id.frontbook}}'></p>
+										
+						<div class="caption list-group-item">
+							<h4><p><a href="{% url 'view_book' book_id.id%}">{{book_id.title}}</a></p></h4>
+							<h4><p>${{book_id.price}}</p></h4>
+                            <button type="button" class="btn btn-primary">Comprar</button>
+                       	</div>
+                       	{% endfor%}
+                    {% else %}
+			  			<h5 class="list-group-item">No se registran libros</h5>
+			  		{%endif%}
+				    	</div> 
+				</div>
+			</div>
+		</div>	
+    </section>
+
+
+{% endblock %}

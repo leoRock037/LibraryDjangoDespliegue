@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+
+{% block title %}Noticias-Novedades{% endblock %}
+
+{% block content %}
+
+
+	
+	<!-- ...................Contenedor Contenido General......................... -->
+
+
+	<section class="container content">
+    	<div class="row">
+			<div class="col-md-2">
+                <p class="lead">Listado Noticias</p>
+                <div class="list-group">
+                	{% if News %}
+		  				{% for b in News%}
+		  					<p><a class="list-group-item" href="">{{b.title}}</a></p>
+		  				{% endfor%}
+
+		  			{% else %}
+		  				<h5 class="list-group-item">No se registran Noticias</h5>
+		  			{%endif%}
+                </div>
+            </div>
+    			       	
+        	<div class="col-md-8 row ">
+        		<div class="page-header">
+						<h3 class="text-center">NOTICIAS - NOVEDADES</h3>
+				</div>
+				<section class="text-center">
+					{% if News %}
+		  				{% for b in News%}
+		  					<div class="list-group-item">
+			  					<p><h3>{{b.title}}</h3></p>
+			  					<p><img src='{{ MEDIA_URL }}{{b.newsImage}}'/></p>
+			  					<p>{{b.date}}</p>
+			  					<p>{{b.description}}</p>
+			  				</div>
+		  				{% endfor%}
+
+		  			{% else %}
+		  				<h5 class="list-group-item">No se registran Noticias</h5>
+		  			{%endif%}		      	
+		      	</section>
+			</div>
+				
+		</div>	
+	</section>
+
+{% endblock %}

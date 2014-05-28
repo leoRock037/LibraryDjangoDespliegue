@@ -1,0 +1,68 @@
+{% extends "base-admin.html" %}
+
+{% block title %}Agregar Ediorial{% endblock %}
+
+{% block content %}
+
+	<!-- ...................Contenedor Contenido General......................... -->
+
+	
+	<section class="container content">
+    	<div class="row">
+        	
+        	<section class="panel panel-default">
+  				<section class="panel-body">
+		        	<div class="col-md-12 row">
+		        		<div class="page-header">
+								<h3 class="text-center">AGREGAR EDITORIAL</h3>
+						</div>
+						<section>
+							<form action="" method="POST" role="form">{% csrf_token %}
+								<div class="form-group">
+									<label for="name">Nombre Editorial:</label>
+									<input name="name" id="name" type="text" class="form-control" placeholder="Nombre" required="" autofocus="">
+							    </div>
+
+							    <div class="form-group">
+									<label for="address">Dirección:</label>
+									<input name="address" id="address" type="text" class="form-control" placeholder="Dirección" required="" autofocus="">
+							    </div> 
+
+							    <div class="form-group">
+									<label for="state_province">País:</label>
+									<input name="state_province" id="state_province" type="text" class="form-control" placeholder="país" required="" autofocus="">
+							    </div> 
+
+							    <div class="form-group">
+									<label for="city">Cuidad:</label>
+									<input name="city" id="city" type="text" class="form-control" placeholder="Ciudad" required="" autofocus="">
+							    </div>
+
+
+							    <div class="form-group">
+								    <label for="website">Pagina Web:</label>
+								    <input  name="website" type="url" class="form-control" id="website" value="http://">
+								</div>
+
+							
+								<div class="form-group">
+								    <label for="logotype" name="logotype">Cargar Logo Editorial:</label>
+								    <input type="file" id="logotype">
+								    
+								</div>
+								<div class="alert alert-success text-center">{{ information }}</div>
+								<button class="btn btn-lg btn-success btn-block" type="submit">Guardar</button>
+								
+							</form>
+							
+
+			        			      	
+				      	</section>
+					</div>
+				</section>
+			</section>
+		</div>	
+	</section>
+  		
+
+{% endblock %}

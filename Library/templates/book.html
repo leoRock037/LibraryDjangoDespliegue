@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Libro{% endblock %}
+
+{% block content %}
+
+	<!-- ...................Contenedor barra de Busqueda ......................... -->
+
+	<section class="container">
+	   	<div class=" col-lg-push-3 col-lg-6">
+		    <div class="input-group">
+		      <input type="search" placeholder="Escribe el nombre de un libro..." class="form-control">
+		      <span class="input-group-btn">
+		        <button class="btn btn-default" type="button">Buscar</button>
+		      </span>
+		    </div>
+	  	</div>
+	</section>					
+
+
+	<!-- ...................Contenedor Contenido General......................... -->
+
+	<section class="container content">
+        <div class="row">
+            <div class="col-md-2">
+                <p class="lead">Libros por Categoria</p>
+                <div class="list-group">
+                	{% if category %}
+			  			{% for b in category%}
+			  				<p><a class="list-group-item" href="#">{{b.name_Category}}</a></p>
+			  			{% endfor%}
+
+			  		{% else %}
+			  			<h5 class="list-group-item">No se registran Libros</h5>
+			  		{%endif%}
+                </div>
+            </div>
+
+            <div class="col-md-8 row text-center">
+            	<div class="page-header">
+  					<h4 class="text-center">INFORMACIÓN GENERAL LIBRO</h4>
+				</div>	
+				<div class="col-md-push-3 col-md-7">
+					<div class="thumbnail">
+						<p><img src='{{MEDIA_URL}}{{book.frontbook}}'></p>
+						
+							<div class="cation">
+								<h4>{{book.title}}</h4>
+								<h4>${{book.price}}</h4>
+	                            
+	                            <ul>
+				      				<li>Autor:corregir</li>
+				      				<li>Editorial:{{book.publisher}}</li>
+				      				<li>Fecha de  publicación:{{book.publication_date}}</li>
+				      				<li>ISBN:{{book.ISBN}}</li>
+				      				<li>Reseña:{{book.description}}</li>
+			      				</ul>
+			      				<button type="button" class="btn btn-primary">Comprar</button>
+                       		</div>
+				    </div> 
+				</div>
+			</div>
+		</div>	
+    </section>
+
+
+{% endblock %}
