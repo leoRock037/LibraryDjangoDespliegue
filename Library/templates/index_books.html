@@ -51,10 +51,11 @@
 					  <li><a href="#">5</a></li>
 					  <li><a href="#">&raquo;</a></li>
 					</ul>
-				</div>	
-				<div class="col-sm-2 col-lg-2 col-md-2">
-					{% if books %}
+				</div>
+				{% if books %}
 						{% for book_id in books%}
+				<div class="col-sm-2 col-lg-2 col-md-2">
+					
 						<div class="thumbnail ">
 							<p><img src='{{MEDIA_URL}}{{book_id.frontbook}}'></p>
 										
@@ -63,12 +64,13 @@
 							<h4><p>${{book_id.price}}</p></h4>
                             <button type="button" class="btn btn-primary">Comprar</button>
                        	</div>
-                       	{% endfor%}
-                    {% else %}
-			  			<h5 class="list-group-item">No se registran libros</h5>
-			  		{%endif%}
+                       	
 				    	</div> 
 				</div>
+						{% endfor%}
+                {% else %}
+		  			<h5 class="list-group-item">No se registran libros</h5>
+		  		{%endif%}
 			</div>
 		</div>	
     </section>

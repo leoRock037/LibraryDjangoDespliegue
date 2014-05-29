@@ -51,12 +51,14 @@
 	<section class="container content">
         <div class="row">
             <div class="col-md-2">
-                <p class="lead">Listado de Libros</p>
+                <p class="lead">Listado mas vendidos</p>
                 <div class="list-group">
-                	{% if category %}
-			  			{% for books in category %}
-			  				<p><a class="list-group-item" href="#">{{books.title}}</a></p>
+
+					{% if books %}
+      		  			{% for book_id in books %}
+			  				<p><a class="list-group-item" href="{% url 'view_book' book_id.id%}">{{book_id.title}}</a></p>
 			  			{% endfor%}
+			  			
 
 			  		{% else %}
 			  			<h5 class="list-group-item">No se registran categoriabbs</h5>
@@ -68,24 +70,28 @@
             	<div class="page-header">
   					<h4 class="text-center">LIBROS MAS VENDIDOS </h4>
 				</div>
-					
+
+
+				{% if books %}
+						{% for book_id in books%}
+
 				<div class="col-sm-2 col-lg-2 col-md-2">
-					{% if category %}
-						{% for b in category%}
+					
 					<div class="thumbnail ">
-						<p><img src='{{ MEDIA_URL }}{{b.frontbook}}'></p>
+						<p><img src='{{ MEDIA_URL }}{{book_id.frontbook}}'></p>
 										
 						<div class="caption list-group-item">
-							<h4><p><a href="{% url 'view_books'%}">{{b.title}}</a></p></h4>
-							<h4><p>${{b.price}}</p></h4>
+							<h4><p><a href="{% url 'view_book' book_id.id%}">{{book_id.title}}</a></p></h4>
+							<h4><p>${{book_id.price}}</p></h4>
                             <button type="button" class="btn btn-primary">Comprar</button>
                        	</div>
-                       	{% endfor%}
-                    {% else %}
-			  			<h5 class="list-group-item">No se registran categorias</h5>
-			  		{%endif%}
+                       	
 				    </div> 
 				</div>
+						{% endfor%}
+                {% else %}
+			  		<h5 class="list-group-item">No se registran categorias</h5>
+			  	{%endif%}
 				
 			</div>
 		</div>	

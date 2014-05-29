@@ -8,8 +8,8 @@ from django.core.urlresolvers import reverse
 
 
 def home(request):
-	cat = Book.objects.filter(status = True)
-	ctx = {"category":cat}
+	book = Book.objects.filter(status = True)
+	ctx = {"books":book}
 	return render_to_response('home.html',ctx,context_instance = RequestContext(request))
 
 
@@ -25,7 +25,8 @@ def book(request,id_book):
 	book = Book.objects.filter(status = True)
 	cat = CategoryBook.objects.filter(status = True)
 	return render_to_response('book.html',{'book':book_id,'books':book,"category":cat},context_instance = RequestContext(request))
-	
+
+
 	
 def category_book(request):
 	return render_to_response('CategoryBook.html')
