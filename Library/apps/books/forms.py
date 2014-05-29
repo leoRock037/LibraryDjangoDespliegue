@@ -1,6 +1,6 @@
 
 from django import forms
-from apps.books.models import Author,Publisher,CategoryBook,Book
+from apps.books.models import Author,Publisher,CategoryBook,Book,Document
 
 
 class LoginForm(forms.Form):
@@ -11,7 +11,7 @@ class LoginForm(forms.Form):
 class addBookForm(forms.ModelForm):
 	class Meta:
 		model 	= Book
-		exclude ={'status','frontbook',}
+		exclude ={'status'}
 
 
 
@@ -35,7 +35,7 @@ class addBookForm(forms.Form):
 
 class addNewsForm(forms.Form):
 	title 		= forms.CharField(max_length=50)
-	newsImage	= forms.ImageField(required=False)#cambiar para poder agregarla
+	newsImage	= forms.FileField(required=False)#cambiar para poder agregarla
 	date 		= forms.DateField()
 	description = forms.CharField(widget = forms.Textarea)
 
@@ -67,3 +67,7 @@ class addAuthorForm(forms.Form):
 	def clean(self):#sirve para validar la informacion ingresada por el usuario
 		return self.cleaned_data
 	
+class DocumentForm(forms.Form):
+    docfile = forms.FileField(
+        label='Select a file'
+    )

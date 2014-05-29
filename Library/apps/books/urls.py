@@ -28,6 +28,8 @@ urlpatterns = patterns('apps.books.views',
 	url(r'^addPublisher/$','addPublisher_view',name = 'view_addPublisher'),
 	url(r'^addAuthor/$','addAuthor_view',name = 'view_addAuthor'),
 
+	url(r'^list/$', 'list', name='list'),
+
 
 	
 

@@ -17,14 +17,15 @@
 								<h3 class="text-center">AGREGAR LIBRO</h3>
 						</div>
 						<section>
-							<form action="." method="POST" role="form" class="">
+							<form action="{% url 'view_addBook' %}" method="POST" role="form" class="" enctype="multipart/form-data">
 								
 								{% csrf_token %}
 								{{ form.as_p }}
 								<input type="submit" value="Guardar">
 								<input type="reset" value="Reset">
 							</form>
-			        	{{ information }}		      	
+			        	{{ information }}
+			        		      	
 				      	</section>
 					</div>
 				</section>
@@ -34,3 +35,5 @@
   		
 
 {% endblock %}
+
+

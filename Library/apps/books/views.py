@@ -1,10 +1,10 @@
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.template import RequestContext
-from apps.books.models import CategoryBook, News, Publisher, Author,Book,Contact
-from apps.books.forms import LoginForm,addNewsForm,addPublisherForm,addAuthorForm,addBookForm
+from apps.books.models import CategoryBook, News, Publisher, Author,Book,Contact,Document
+from apps.books.forms import LoginForm,addNewsForm,addPublisherForm,addAuthorForm,addBookForm,DocumentForm
 from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponseRedirect
-
+from django.core.urlresolvers import reverse
 
 
 def home(request):
@@ -100,18 +100,21 @@ def addBook_view(request):
 	if request.method == "POST":
 		form = addBookForm(request.POST,request.FILES)
 		if form.is_valid():
+			newimg = Book(frontbook = request.FILES['frontbook'])
 			add = form.save(commit=False)
 			add.status = True
 			add.save()#guarda la info
 			form.save_m2m()#guarda lo many to many
 			info ="saved information!"
-			
-
+			return HttpResponseRedirect(reverse('apps.books.views.index_books'))		
 	else:
 		form = addBookForm()
-	ctx = {'form':form, 'information':info}
+	image=Book.objects.all()
+	auth = Author.objects.filter(status = True)
+	publisher=Publisher.objects.filter(status=True)
+	category=CategoryBook.objects.filter(status=True)
+	ctx = {'form':form, 'information':info,'image':image, 'authors':auth,'publisher':publisher,'category':category}
 	return render_to_response('addBook.html',ctx,context_instance=RequestContext(request))
-
 
 
 
@@ -174,6 +177,7 @@ def addNews_view(request):
 			form = addNewsForm(request.POST,request.FILES)
 			info = "Loading information...."
 			if form.is_valid():
+				
 				title 		= form.cleaned_data['title']
 				newsImage	= form.cleaned_data['newsImage'] #se obtiene con el request.FILE
 				date 		= form.cleaned_data['date']
@@ -181,20 +185,22 @@ def addNews_view(request):
 
 				news = News()#objeto de tipo Noticia y sus atributos
 				news.title		= title
-				if newsImage:
-					news.newsImage	= newsImage #validacion imagen
-
+				newsImage= News(newsImage=request.FILE['newsImage']) #validacion imagen
+				add = form.save(commit=False)
 				news.date		= date
 				news.description= description
 				news.status		= True
 				news.save()	#Guarda la informacion
 				info ="saved information!"
+				return HttpResponseRedirect(reverse('apps.books.views.news'))
+				
 
 			else:
 				info = "incorrect information"
 			
 			form = addNewsForm()
-			ctx = {'form':form,'information':info}
+			img=News.objects.all()
+			ctx = {'form':form,'information':info,'imagen':img}
 			return render_to_response('addNews.html',ctx,context_instance=RequestContext(request))
 
 		else:
@@ -285,3 +291,25 @@ def addAuthor_view(request):
 		return HttpResponseRedirect('/login')
 
 
+def list(request):
+    # Handle file upload
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            newdoc = Document(docfile = request.FILES['docfile'])
+            newdoc.save()
+
+            # Redirect to the document list after POST
+            return HttpResponseRedirect(reverse('apps.books.views.list'))
+    else:
+        form = DocumentForm() # A empty, unbound form
+
+    # Load documents for the list page
+    documents = Document.objects.all()
+
+    # Render list page with the documents and the form
+    return render_to_response(
+        'list.html',
+        {'documents': documents, 'form': form},
+        context_instance=RequestContext(request)
+    )

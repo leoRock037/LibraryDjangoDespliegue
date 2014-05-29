@@ -41,7 +41,7 @@ class Book(models.Model):
 	price 				= models.DecimalField(max_digits = 20,decimal_places = 4)
 	description 		= models.TextField()
 	category 			= models.ManyToManyField(CategoryBook)
-	frontbook 			= models.ImageField(upload_to ='imagesDB')
+	frontbook 			= models.FileField(upload_to ='imagesDB')
 	status 				= models.BooleanField(default = True)
 
 	def __unicode__(self):
@@ -51,11 +51,10 @@ class Book(models.Model):
 		pass
 
 
-
 class News(models.Model):
 
 	title 		= models.CharField(max_length = 50)
-	newsImage	= models.ImageField(upload_to ='imagesDB',null=True,blank=True)
+	newsImage	= models.FileField(upload_to ='imagesDB')
 	date 		= models.DateField()
 	description = models.TextField()
 	status 		= models.BooleanField(default = True)
@@ -72,3 +71,6 @@ class Contact(models.Model):
 
 	def __unicode__(self):
 		return self.email_Contact
+
+class Document(models.Model):
+    docfile = models.FileField(upload_to='imagesDB/%Y/%m/%d')
