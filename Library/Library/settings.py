@@ -39,8 +39,11 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'apps.books',
     #'south',
+    'apps.sales',
 
 )
+
+STRIPE_API_KEY = 'xxxxxxxxxxxxxxxxxxxx'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

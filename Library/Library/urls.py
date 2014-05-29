@@ -11,7 +11,7 @@ urlpatterns = patterns('',
         {'template_name': 'login.html'}, name='login'),
     url(r'^logout/', 'django.contrib.auth.views.logout_then_login', name='logout'),
 
- 	
+ 	url(r'^',include('apps.sales.urls')),
 
 
 )
