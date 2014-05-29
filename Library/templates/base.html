@@ -20,6 +20,7 @@
 	<section class="container logo">		
 		<img src="/static/images/imagesWEB/logo.png">
 	</section>
+
 	
 	<!-- ...................Contenedor Navegacion ......................... -->
 
@@ -27,37 +28,30 @@
         <div class="container">
         	<div class="col-md-push-3 col-md-10">
 	            <div class="navbar-header">
-	                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-	                    <span class="sr-only">Toggle navigation</span>
-	                    <span class="icon-bar"></span>
-	                    <span class="icon-bar"></span>
-	                    <span class="icon-bar"></span>
-	                </button>
-	                <a class="navbar-brand" href="{% url 'view_home' %}">Inicio</a>
+	               <a class="navbar-brand" href="{% url 'view_home' %}">Inicio</a>
 	            </div>
-
 	            <div class="collapse navbar-collapse navbar-ex1-collapse">
 	                <ul class="nav navbar-nav">	                
 	       				<li><a href="{% url 'view_books' %}">Libros</a></li>
 	       				<li><a href="{% url 'view_authors' %}">Autores</a></li>
 	       				<li><a href="{% url 'view_publishers' %}">Editoriales</a></li>
 	       				<li><a href="{% url 'view_news' %}">Novedades</a></li>
-	       				<li><a href=" {% url 'view_contact' %}">Contacto</a></li>
-	       				
-	       				{% if user.is_authenticated %}
-	       				<li><a href="{% url 'view_logout' %}">Cerrar sesión</a></li>
-	       				<li><a href="{% url 'view_sesion' %}">Admin</a></li>
-	       				{% else %}
-	       				<li><a href="{% url 'view_login'%}">Login</a></li>
-	       				{% endif%}
-
+	       				<li><a href=" {% url 'view_contact' %}">Contacto</a></li>       				
 	                </ul>
 	            </div>
 	        </div>
         </div>
     </nav>
 	
-
+    <div class="container text-right">
+    	{{ user }}
+		{% if user.is_authenticated %}
+		<a href="{% url 'logout' %}">logout</a>
+		{% else %}
+		<a href="{% url 'login' %}">login</a>
+		{% endif %}
+    					
+    </div>
 	<!-- ...................Contenedor Contenido General......................... -->
 
 	{% block content %}
@@ -86,7 +80,7 @@
 					
 					<ul class="col-lg-3">
 						<h5>Registro</h5>
-						<li><a href="">Registrarse</a></li>
+						<li><a href="{% url 'user' %}">Registrarse</a></li>
 						<li><a href="">¿Has olvidado tu contraseña?</a></li>
 						<li><a href="">Politica y condiciones</a></li>
 

@@ -1,11 +1,5 @@
-
 from django import forms
 from apps.books.models import Author,Publisher,CategoryBook,Book,Document
-
-
-class LoginForm(forms.Form):
-	username = forms.CharField(widget = forms.TextInput())
-	password = forms.CharField(widget = forms.PasswordInput(render_value = False))
 
 
 class addBookForm(forms.ModelForm):
@@ -71,3 +65,4 @@ class DocumentForm(forms.Form):
     docfile = forms.FileField(
         label='Select a file'
     )
+

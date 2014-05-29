@@ -1,10 +1,17 @@
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.template import RequestContext
 from apps.books.models import CategoryBook, News, Publisher, Author,Book,Contact,Document
-from apps.books.forms import LoginForm,addNewsForm,addPublisherForm,addAuthorForm,addBookForm,DocumentForm
-from django.contrib.auth import login, logout, authenticate
+from apps.books.forms import addNewsForm,addPublisherForm,addAuthorForm,addBookForm,DocumentForm
+from django.contrib import auth
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+
+
+def logIn(request):
+    login(request, user)
+    return render_to_response('logIn.html')
 
 
 def home(request):
@@ -66,36 +73,7 @@ def contact(request):
 
 
 
-def login_view(request):
-	messaje = ""
-	if request.user.is_authenticated():
-		return HttpResponseRedirect('/home')
-	else:
-		if request.method =="POST":
-			form = LoginForm(request.POST)
-			if form.is_valid():
-				username = form.cleaned_data["username"]
-				password = form.cleaned_data["password"]
-				user = authenticate(username = username,password = password)
-				if user is not None and user.is_active:
-					login(request,user)
-					return HttpResponseRedirect('/sesion-admin')
-				else:
-					messaje = "usuario y/o password incorrecto"
-
-		form = LoginForm()
-		ctx = {"form":form,"messaje":messaje}
-		return render_to_response('login.html',ctx,context_instance = RequestContext(request))		
-
-	
-def logout_view(request):
-	logout(request)
-	return HttpResponseRedirect('/home')
-
-def sesion_admin_view(request):
-	return render_to_response('sesion-admin.html')
-
-
+@login_required()
 def addBook_view(request):
 	info = "Loading information...."
 	if request.method == "POST":
@@ -171,7 +149,7 @@ def addBook_view(request):
 		return HttpResponseRedirect('/login')
 """
 
-
+@login_required()
 def addNews_view(request):
 	if request.user.is_authenticated():
 		if request.method == "POST":
@@ -211,7 +189,7 @@ def addNews_view(request):
 	else:
 		return HttpResponseRedirect('/login')
 
-
+@login_required()
 def addPublisher_view(request):
 	if request.user.is_authenticated():
 		if request.method == "POST":
@@ -250,7 +228,7 @@ def addPublisher_view(request):
 	else:
 		return HttpResponseRedirect('/login')
 
-
+@login_required()
 def addAuthor_view(request):
 	if request.user.is_authenticated():
 		
@@ -314,3 +292,15 @@ def list(request):
         {'documents': documents, 'form': form},
         context_instance=RequestContext(request)
     )
+
+
+def user(request):
+	return render(request,'createUser.html')
+
+def createUser(request):
+	username = request.POST['username']
+	password = request.POST['password']
+	email = request.POST['email']
+	user = User.objects.create_user(username, email, password)	
+	user.save()
+	return HttpResponseRedirect(reverse('django.contrib.auth.views.login'))

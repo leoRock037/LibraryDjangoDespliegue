@@ -117,5 +117,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'apps/books/static/images')
 MEDIA_URL = '/static/images/'
 
 
+# Redirect when login is correct.
+LOGIN_REDIRECT_URL = "/home"
+# Redirect when login is not correct.
+LOGIN_URL = '/login'
+# Logout
+LOGOUT_URL = "/logout"
 
-
+#AUTH_PROFILE_MODULE = 'chat_app.UserProfile'
