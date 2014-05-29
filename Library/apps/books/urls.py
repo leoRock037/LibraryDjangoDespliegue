@@ -27,10 +27,8 @@ urlpatterns = patterns('apps.books.views',
 	url(r'^addAuthor/$','addAuthor_view',name = 'view_addAuthor'),
 
 	url(r'^list/$', 'list', name='list'),
-
 	url(r'^createuser/user$', 'createUser' ,name='createUser'),
     url(r'^createuser/$', 'user' ,name='user'),
 	
-
-
+	url(r'^sesion-admin/$','sesion_admin_view',name = 'view_sesion'),
 )

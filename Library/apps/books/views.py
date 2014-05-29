@@ -71,7 +71,8 @@ def contact(request):
 	ctx = {"Contact":cont}
 	return render_to_response('contact.html',ctx,context_instance = RequestContext(request))
 
-
+def sesion_admin_view(request):
+	return render_to_response('sesion-admin.html')
 
 @login_required()
 def addBook_view(request):
