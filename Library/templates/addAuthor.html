@@ -17,37 +17,33 @@
 								<h3 class="text-center">AGREGAR AUTOR</h3>
 						</div>
 						<section>
-							<form action="" method="POST" role="form">{% csrf_token %}
+							<form  method="POST" role="form" class="" enctype="multipart/form-data">
+								{% csrf_token %}
 								<div class="form-group">
-									<label for="first_name">Nombre del autor:</label>
-									<input name="first_name" id="first_name" type="text" class="form-control" placeholder="Nombre" required="" autofocus="">
-							    </div>
-
-							    <div class="form-group">
-									<label for="last_name">Apellido del autor:</label>
-									<input name="last_name" id="last_name" type="text" class="form-control" placeholder="Apellido" required="" autofocus="">
-							    </div>
-
-							    <div class="form-group">
-								    <label for="InputEmail1">Correo:</label>
-								    <input  name="email" type="email" class="form-control" id="InputEmail1" placeholder="correo@ejemplo.com">
-								</div>
-
-								<div class="form-group">
-									<label for="biography">Reseña Bibiografica</label>
-									<textarea  name="biography" id="biography" class="form-control" rows="4"></textarea>
+									<label for="id_first_name">Nombre:</label>
+									<input id="id_first_name" maxlength="30" name="first_name" type="text" class="form-control" placeholder="Nombre" />
 								</div>
 								<div class="form-group">
-								    <label for="photo" name="photo">Cargar Foto Autor:</label>
-								    <input type="file" id="photo">
-								    
+									<label for="id_last_name">Apellido:</label>
+									<input id="id_last_name" maxlength="40" name="last_name" type="text" class="form-control" placeholder="Apellido" />
+								</div>
+								<div class="form-group">
+									<label for="id_email">E-mail:</label>
+									<input id="id_email" maxlength="75" name="email" type="email"  class="form-control" placeholder="correo@ejemplo.com" />
+								</div>
+								<div class="form-group">
+									<label for="id_biography">Biography:</label>
+									<textarea id="id_biography" name="biography" class="form-control" rows="4"></textarea>
+								</div>
+								<div class="form-group"><label for="id_photo">Photo:</label>
+									<input id="id_photo" name="photo" type="file" />
 								</div>
 								<button class="btn btn-lg btn-success btn-block" type="submit">Guardar</button>
-		
+								<button class="btn btn-lg btn-success btn-block" type="reset">Limpiar campos</button>
 							</form>
-			        	{{ information }}		      	
-				      	</section>
-					</div>
+			        		{{ information }}
+			        	</section>
+			        </div>		      	
 				</section>
 			</section>
 		</div>	

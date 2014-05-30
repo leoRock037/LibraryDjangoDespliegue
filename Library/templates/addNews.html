@@ -17,28 +17,31 @@
 								<h3 class="text-center">AGREGAR NOTICIA</h3>
 						</div>
 						<section>
-							<form action="" method="POST" role="form" enctype="multipart/form-data">{% csrf_token %}
-								
+							<form  method="POST" role="form" enctype="multipart/form-data"><input type='hidden'/>
+								{% csrf_token %}
+
+
 								<div class="form-group">
-									<label for="title">Ingrese el Titulo de la noticia:</label>
-									<input name="title" id="title" type="text" class="form-control" placeholder="Titulo noticia" required="" autofocus="">
-							    </div>
-								<div class="form-group">
-									<input name="date" type="date" class="form-control" placeholder="Fecha" required="" autofocus="">
+									<label for="id_title">Titulo Noticia:</label>
+									<input id="id_title" maxlength="50" name="title" type="text" class="form-control" placeholder="Nombre"/>
 								</div>
 								<div class="form-group">
-									<label for="description">Ingrese el Contenido de la noticia:</label>
-									<textarea  name="description" id="description" class="form-control" rows="4"></textarea>
+									<label for="id_newsImage">Foto noticia:</label>
+									<input id="id_newsImage" name="newsImage" type="file" class="form-control"/>
 								</div>
 								<div class="form-group">
-								    <label for="photo" name="newsImage">Cargar Foto Noticia:</label>
-								    <input type="file" id="photo">
-								    
+									<label for="id_date">Fecha:</label>
+									<input id="id_date" name="date" type="text" class="form-control" placeholder="Nombre" />
+								</div>
+								<div class="form-group">
+									<label for="id_description">Description:</label>
+									<textarea id="id_description" name="description" rows="10" class="form-control">
+									</textarea>
 								</div>
 								<button class="btn btn-lg btn-success btn-block" type="submit">Guardar</button>
 		
 							</form>
-			        	{{ information }}		      	
+			        	Loading information....		      	
 				      	</section>
 					</div>
 				</section>
@@ -48,4 +51,5 @@
   		
 
 {% endblock %}
-
+		
+							

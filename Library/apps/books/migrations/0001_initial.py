@@ -48,9 +48,9 @@ class Migration(SchemaMigration):
             ('ISBN', self.gf('django.db.models.fields.CharField')(max_length=13)),
             ('publisher', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['books.Publisher'])),
             ('publication_date', self.gf('django.db.models.fields.DateField')()),
-            ('price', self.gf('django.db.models.fields.DecimalField')(max_digits=20, decimal_places=0)),
+            ('price', self.gf('django.db.models.fields.DecimalField')(max_digits=20, decimal_places=4)),
             ('description', self.gf('django.db.models.fields.TextField')()),
-            ('frontbook', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
+            ('frontbook', self.gf('django.db.models.fields.files.FileField')(max_length=100)),
             ('status', self.gf('django.db.models.fields.BooleanField')(default=True)),
         ))
         db.send_create_signal(u'books', ['Book'])
@@ -77,7 +77,7 @@ class Migration(SchemaMigration):
         db.create_table(u'books_news', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('newsImage', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
+            ('newsImage', self.gf('django.db.models.fields.files.FileField')(max_length=100)),
             ('date', self.gf('django.db.models.fields.DateField')()),
             ('description', self.gf('django.db.models.fields.TextField')()),
             ('status', self.gf('django.db.models.fields.BooleanField')(default=True)),
@@ -93,6 +93,13 @@ class Migration(SchemaMigration):
             ('status', self.gf('django.db.models.fields.BooleanField')(default=True)),
         ))
         db.send_create_signal(u'books', ['Contact'])
+
+        # Adding model 'Document'
+        db.create_table(u'books_document', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('docfile', self.gf('django.db.models.fields.files.FileField')(max_length=100)),
+        ))
+        db.send_create_signal(u'books', ['Document'])
 
 
     def backwards(self, orm):
@@ -120,6 +127,9 @@ class Migration(SchemaMigration):
         # Deleting model 'Contact'
         db.delete_table(u'books_contact')
 
+        # Deleting model 'Document'
+        db.delete_table(u'books_document')
+
 
     models = {
         u'books.author': {
@@ -138,9 +148,9 @@ class Migration(SchemaMigration):
             'authors': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['books.Author']", 'symmetrical': 'False'}),
             'category': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['books.CategoryBook']", 'symmetrical': 'False'}),
             'description': ('django.db.models.fields.TextField', [], {}),
-            'frontbook': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
+            'frontbook': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'price': ('django.db.models.fields.DecimalField', [], {'max_digits': '20', 'decimal_places': '0'}),
+            'price': ('django.db.models.fields.DecimalField', [], {'max_digits': '20', 'decimal_places': '4'}),
             'publication_date': ('django.db.models.fields.DateField', [], {}),
             'publisher': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['books.Publisher']"}),
             'status': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
@@ -160,12 +170,17 @@ class Migration(SchemaMigration):
             'phone_number': ('django.db.models.fields.IntegerField', [], {}),
             'status': ('django.db.models.fields.BooleanField', [], {'default': 'True'})
         },
+        u'books.document': {
+            'Meta': {'object_name': 'Document'},
+            'docfile': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
+        },
         u'books.news': {
             'Meta': {'object_name': 'News'},
             'date': ('django.db.models.fields.DateField', [], {}),
             'description': ('django.db.models.fields.TextField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'newsImage': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
+            'newsImage': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
             'status': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         },

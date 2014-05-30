@@ -5,7 +5,8 @@ from apps.books import views
 
 urlpatterns = patterns('apps.books.views',
 	
-
+	
+	
 	url(r'^home/$','home', name = 'view_home'),
 
 	url(r'^books/$','index_books', name = 'view_books'),
@@ -26,7 +27,10 @@ urlpatterns = patterns('apps.books.views',
 	url(r'^addPublisher/$','addPublisher_view',name = 'view_addPublisher'),
 	url(r'^addAuthor/$','addAuthor_view',name = 'view_addAuthor'),
 
-	url(r'^list/$', 'list', name='list'),
+	url(r'^editAuthor/(?P<id_author>.*)/$','edit_author_view',name= "view_edit_author"),
+	url(r'^listauthors/$','index_authors_edit', name = 'view_authorslist'),
+
+
 	url(r'^createuser/user$', 'createUser' ,name='createUser'),
     url(r'^createuser/$', 'user' ,name='user'),
 	
