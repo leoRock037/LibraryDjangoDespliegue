@@ -1,0 +1,16 @@
+{% extends 'base-admin.html' %}
+{% block title %} Editar Autor {% endblock %}
+{% block content %}
+<div class="container">
+<div class="row">
+	<div class=" text_center col-md-push-4 col-md-8">
+		<form method="post">{% csrf_token %}
+		    Esta seguro que quiere eliminar la editorial "{{ object }}" ?
+		   	<button type="submit" class="btn btn-danger">Eliminar</button>
+		</form>
+
+	</div>
+</div>
+</div>
+	
+{% endblock %}
